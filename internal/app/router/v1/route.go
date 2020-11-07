@@ -1,7 +1,7 @@
 package routerv1
 
 import (
-	"fiberio/handler"
+	"fiberio/internal/app/handler"
 	fiber "github.com/gofiber/fiber/v2"
 )
 
