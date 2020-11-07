@@ -1,10 +1,10 @@
 module fiberio
 
-go 1.15
+go 1.14
 
 require (
 	github.com/andybalholm/brotli v1.0.1 // indirect
-	github.com/gofiber/fiber v1.14.6
+	github.com/gofiber/fiber/v2 v2.1.4
 	github.com/gofiber/utils v0.1.2 // indirect
 	github.com/gorilla/schema v1.2.0 // indirect
 	github.com/klauspost/compress v1.11.2 // indirect
