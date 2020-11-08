@@ -1,9 +1,9 @@
 package server
 
 import (
-	middleware "fiberio/internal/app/middleware"
-	repo "fiberio/internal/app/repo"
-	routerv1 "fiberio/internal/app/router/v1"
+	middleware "fiberio/app/middleware"
+	repo "fiberio/app/repo"
+	routerv1 "fiberio/app/router/v1"
 	fiber "github.com/gofiber/fiber/v2"
 )
 

@@ -1,7 +1,7 @@
 package main
 
 import (
-	server "fiberio/internal/app/fiberio"
+	server "fiberio/app/fiberio"
 	_ "github.com/joho/godotenv/autoload"
 	"log"
 	"os"

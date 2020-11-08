@@ -1,7 +1,7 @@
 package handler
 
 import (
-	repo "fiberio/internal/app/repo"
+	repo "fiberio/app/repo"
 	fiber "github.com/gofiber/fiber/v2"
 )
 
