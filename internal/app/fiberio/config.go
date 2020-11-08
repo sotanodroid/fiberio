@@ -1,18 +1,19 @@
 package server
 
 import (
-	"github.com/joeshaw/envdecode"
+	"github.com/kelseyhightower/envconfig"
 )
 
 // Config ...
 type Config struct {
-	DBURL string `env:"DB_URL,required"`
+	DBURL   string `envconfig:"DB_URL"`
+	AppPort string `envconfig:"APP_PORT"`
 }
 
 // NewConfig ...
 func NewConfig() (*Config, error) {
 	cfg := new(Config)
-	if err := envdecode.Decode(cfg); err != nil {
+	if err := envconfig.Process("FIBERIO", cfg); err != nil {
 		return nil, err
 	}
 

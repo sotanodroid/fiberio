@@ -20,7 +20,7 @@ func Start(cfg *Config) error {
 	if err != nil {
 		return err
 	}
-	if err := fib.app.Listen(":8000"); err != nil {
+	if err := fib.app.Listen(cfg.AppPort); err != nil {
 		return err
 	}
 	return nil
