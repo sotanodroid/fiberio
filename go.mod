@@ -8,6 +8,8 @@ require (
 	github.com/gofiber/utils v0.1.2 // indirect
 	github.com/gorilla/schema v1.2.0 // indirect
 	github.com/jackc/pgx/v4 v4.9.2
+	github.com/joeshaw/envdecode v0.0.0-20200121155833-099f1fc765bd
+	github.com/joho/godotenv v1.3.0
 	github.com/klauspost/compress v1.11.2 // indirect
 	github.com/mattn/go-colorable v0.1.8 // indirect
 	github.com/valyala/fasthttp v1.17.0 // indirect

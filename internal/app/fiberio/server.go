@@ -13,7 +13,7 @@ type fiberio struct {
 
 // Start ...
 func Start(cfg *Config) error {
-	if err := repo.NewDB(cfg.dbURL); err != nil {
+	if err := repo.NewDB(cfg.DBURL); err != nil {
 		return err
 	}
 	fib, err := newApp()
