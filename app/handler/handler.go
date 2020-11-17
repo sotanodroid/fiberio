@@ -5,10 +5,22 @@ import (
 	fiber "github.com/gofiber/fiber/v2"
 )
 
-// GetByID ...
-func GetByID(c *fiber.Ctx) error {
+// BaseHandler ...
+type BaseHandler struct {
+	db *repo.Db
+}
 
-	res, err := repo.Db.GetAll()
+// NewBasehandler ...
+func NewBasehandler(db *repo.Db) *BaseHandler {
+	return &BaseHandler{
+		db: db,
+	}
+}
+
+// GetByID ...
+func (h *BaseHandler) GetByID(c *fiber.Ctx) error {
+
+	res, err := h.db.GetAll()
 	if err != nil {
 		return err
 	}
@@ -18,7 +30,7 @@ func GetByID(c *fiber.Ctx) error {
 }
 
 // Hello ...
-func Hello(c *fiber.Ctx) error {
+func (h *BaseHandler) Hello(c *fiber.Ctx) error {
 	c.SendString("Hello, world!")
 	return nil
 }

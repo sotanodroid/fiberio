@@ -13,11 +13,8 @@ type fiberio struct {
 
 // Start ...
 func Start(cfg *Config) error {
-	if err := repo.NewDB(cfg.DBURL); err != nil {
-		return err
-	}
-	fib, err := newApp()
-	if err != nil {
+	fib := newApp()
+	if err := fib.setup(cfg.DBURL); err != nil {
 		return err
 	}
 	if err := fib.app.Listen(cfg.AppPort); err != nil {
@@ -27,16 +24,20 @@ func Start(cfg *Config) error {
 }
 
 // NewApp ...
-func newApp() (*fiberio, error) {
-	a := &fiberio{
+func newApp() (*fiberio) {
+	return &fiberio{
 		app: fiber.New(),
 	}
-	a.setup()
-
-	return a, nil
 }
 
-func (f *fiberio) setup() {
-	routerv1.SetupRoutes(f.app)
+func (f *fiberio) setup(DBURL string) error {
+	db, err := repo.NewDB(DBURL)
+	if err != nil {
+		return err
+	}
+
+	routerv1.SetupRoutes(f.app, db)
 	middleware.SetUpLogger(f.app)
+
+	return nil
 }

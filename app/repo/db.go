@@ -5,30 +5,27 @@ import (
 	"github.com/jackc/pgx/v4/pgxpool"
 )
 
-type db struct {
+// Db ...
+type Db struct {
 	Pool *pgxpool.Pool
 }
 
-// Db ...
-var Db *db
-
 // NewDB ...
-func NewDB(dbURL string) error {
+func NewDB(dbURL string) (*Db, error) {
 	conn, err := pgxpool.Connect(context.Background(), dbURL)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
-	Db = &db{
+	return &Db{
 		Pool: conn,
-	}
-
-	return nil
+	}, nil
 }
 
-func (r *db) GetAll() (string, error) {
+// GetAll ...
+func (db *Db) GetAll() (string, error) {
 	ctx := context.Background()
-	conn, err := r.Pool.Acquire(ctx)
+	conn, err := db.Pool.Acquire(ctx)
 	if err != nil {
 		return "", err
 	}
