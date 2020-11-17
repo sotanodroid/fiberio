@@ -8,6 +8,7 @@ import (
 // Db ...
 type Db struct {
 	Pool *pgxpool.Pool
+	ctx context.Context
 }
 
 // NewDB ...
@@ -19,20 +20,20 @@ func NewDB(ctx context.Context, dbURL string) (*Db, error) {
 
 	return &Db{
 		Pool: conn,
+		ctx: ctx,
 	}, nil
 }
 
 // GetAll ...
 func (db *Db) GetAll() (string, error) {
-	ctx := context.Background()
-	conn, err := db.Pool.Acquire(ctx)
+	conn, err := db.Pool.Acquire(db.ctx)
 	if err != nil {
 		return "", err
 	}
 	defer conn.Release()
 
 	var result string
-	if err := conn.QueryRow(ctx, "SELECT 'Hello from db';").Scan(&result); err != nil {
+	if err := conn.QueryRow(db.ctx, "SELECT 'Hello from db';").Scan(&result); err != nil {
 		return "", err
 	}
 
