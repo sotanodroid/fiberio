@@ -1,9 +1,10 @@
 package server
 
 import (
+	"context"
 	middleware "fiberio/app/middleware"
 	repo "fiberio/app/repo"
-	routerv1 "fiberio/app/router/v1"
+	router "fiberio/app/router"
 	fiber "github.com/gofiber/fiber/v2"
 )
 
@@ -24,19 +25,20 @@ func Start(cfg *Config) error {
 }
 
 // NewApp ...
-func newApp() (*fiberio) {
+func newApp() *fiberio {
 	return &fiberio{
 		app: fiber.New(),
 	}
 }
 
 func (f *fiberio) setup(DBURL string) error {
-	db, err := repo.NewDB(DBURL)
+	ctx := context.Background()
+	db, err := repo.NewDB(ctx, DBURL)
 	if err != nil {
 		return err
 	}
 
-	routerv1.SetupRoutes(f.app, db)
+	router.SetupRoutes(f.app, db)
 	middleware.SetUpLogger(f.app)
 
 	return nil

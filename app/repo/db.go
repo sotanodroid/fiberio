@@ -11,8 +11,8 @@ type Db struct {
 }
 
 // NewDB ...
-func NewDB(dbURL string) (*Db, error) {
-	conn, err := pgxpool.Connect(context.Background(), dbURL)
+func NewDB(ctx context.Context, dbURL string) (*Db, error) {
+	conn, err := pgxpool.Connect(ctx, dbURL)
 	if err != nil {
 		return nil, err
 	}
