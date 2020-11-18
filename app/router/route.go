@@ -9,7 +9,9 @@ import (
 // SetupRoutes ...
 func SetupRoutes(app *fiber.App, db *repo.Db) {
 	v1 := app.Group("/api/v1")
+	system := app.Group("/")
 
 	baseHandler := handler.NewBasehandler(db)
 	setupV1Routes(v1, baseHandler)
+	setupSystemRoutes(system, baseHandler)
 }

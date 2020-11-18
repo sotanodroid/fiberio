@@ -39,3 +39,19 @@ func (db *Db) GetAll() (string, error) {
 
 	return result, nil
 }
+
+// Ping ...
+func (db *Db) Ping() (int, error) {
+	conn, err := db.Pool.Acquire(db.ctx)
+	if err != nil {
+		return 0, err
+	}
+	defer conn.Release()
+
+	var result int
+	if err := conn.QueryRow(db.ctx, "SELECT 1").Scan(&result); err != nil {
+		return 0, err
+	}
+
+	return result, nil
+}
